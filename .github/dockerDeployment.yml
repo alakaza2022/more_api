@@ -1,0 +1,39 @@
+name: Build and Test Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build -t your-docker-image-name .
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:3000 your-docker-image-name
+
+      - name: Wait for Container to Start
+        run: sleep 10
+
+      - name: Check Endpoint
+        run: |
+          response_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/your-endpoint)
+          echo "HTTP response code: $response_code"
+          if [ "$response_code" != "200" ]; then
+            echo "Endpoint check failed!"
+            exit 1
+          fi
+
+      - name: Stop and Remove Docker Container
+        run: |
+          docker stop $(docker ps -q)
+          docker rm $(docker ps -aq)
