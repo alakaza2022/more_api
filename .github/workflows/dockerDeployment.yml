@@ -26,7 +26,7 @@ jobs:
 
       - name: Check Endpoint
         run: |
-          response_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/your-endpoint)
+          response_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/movies)
           echo "HTTP response code: $response_code"
           if [ "$response_code" != "200" ]; then
             echo "Endpoint check failed!"
