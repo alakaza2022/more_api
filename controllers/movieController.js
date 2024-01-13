@@ -40,10 +40,23 @@ const deleteMovie = (req, res) => {
   res.json({ message: 'Movie deleted successfully!' });
 };
 
+const getMovieImages = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const images = await movieModel.getMovieImages(id);
+    res.json(images).status(200);
+  } catch (error) {
+    console.error('Error fetching movie images:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+
 module.exports = {
   getAllMovies,
   getMovieById,
   createMovie,
   updateMovie,
   deleteMovie,
+  getMovieImages,
 };
