@@ -17,12 +17,17 @@ jobs:
         run: |
           docker build -t your-docker-image-name .
 
-      - name: Run Docker Container
+      - name: Run Docker Compose
         run: |
-          docker run -d -p 8080:3000 your-docker-image-name
+          docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 
-      - name: Wait for Container to Start
-        run: sleep 10
+      - name: Check Docker Compose Exit Code
+        run: |
+          exit_code=$?
+          if [ $exit_code -ne 0 ]; then
+            echo "Docker Compose failed with exit code $exit_code"
+            exit 1
+          fi
 
       - name: Check Endpoint
         run: |
@@ -32,6 +37,10 @@ jobs:
             echo "Endpoint check failed!"
             exit 1
           fi
+
+      - name: Stop and Remove Docker Containers
+        run: |
+          docker-compose -f docker-compose.test.yml down
 
       - name: Stop and Remove Docker Container
         run: |
