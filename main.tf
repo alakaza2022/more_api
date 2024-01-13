@@ -52,4 +52,10 @@ resource "azurerm_app_service" "example" {
     always_on        = true
     linux_fx_version = "DOCKER|${var.image_name}"
   }
+
+    app_settings = {
+    DOCKER_REGISTRY_SERVER_PASSWORD            = "3kRq4t44Hm1VGVGeKrqWJMXL=uywsQJP"
+    DOCKER_REGISTRY_SERVER_URL                 = "https://crwebappprodwe.azurecr.io"
+    DOCKER_REGISTRY_SERVER_USERNAME            = "crwebappprodwe"
+  }
 }
