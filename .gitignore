@@ -3,6 +3,13 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+#terraform
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
+
 # Logs
 logs
 *.log
@@ -10,6 +17,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#my passwords
+.passwords
 # Runtime data
 pids
 *.pid
