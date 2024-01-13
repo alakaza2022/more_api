@@ -1,10 +1,13 @@
 const express = require('express');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(morgan('combined'));
+
 
 // Routes
 const indexRoute = require('./routes/index');

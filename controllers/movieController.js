@@ -1,9 +1,14 @@
 // controllers/movieController.js
 const movieModel = require('../models/movieModel');
 
-const getAllMovies = (req, res) => {
-  const movies = movieModel.getAllMovies();
-  res.json(movies);
+const getAllMovies = async (req, res) => {
+  try {
+    const movies = await movieModel.getAllMovies();
+    res.json(movies).status(200);
+  } catch (error) {
+    console.error('Error fetching movies:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 const getMovieById = (req, res) => {

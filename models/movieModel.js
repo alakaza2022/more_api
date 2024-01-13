@@ -1,8 +1,28 @@
 // models/movieModel.js
-const movies = [];
+const fetch = require("node-fetch");
 
-const getAllMovies = () => {
-  return movies;
+
+const getAllMovies = async () => {
+  try {
+    const response = await fetch('https://api.themoviedb.org/3/trending/all/week?language=en-US', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZThiZjY3M2FhMWRkYWVjNWE0YzM0YjZlZDlmMGE2YSIsInN1YiI6IjY1YTI1NDQ4NTY5MGI1MDEyOWFmZjI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RriLs2TuPOxrqyU1EItjBb6dLxl1w1dceJSWaU5xszE',
+        'Accept': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const movies = await response.json();
+    
+    return movies.results; // Assuming the API response contains a 'results' property with an array of movies
+  } catch (error) {
+    console.error('Error fetching movies:', error.message);
+    throw error
+  }
 };
 
 const getMovieById = (id) => {
