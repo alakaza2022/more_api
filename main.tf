@@ -57,5 +57,6 @@ resource "azurerm_app_service" "example" {
     DOCKER_REGISTRY_SERVER_PASSWORD            = "3kRq4t44Hm1VGVGeKrqWJMXL=uywsQJP"
     DOCKER_REGISTRY_SERVER_URL                 = "https://crwebappprodwe.azurecr.io"
     DOCKER_REGISTRY_SERVER_USERNAME            = "crwebappprodwe"
+    WEBSITES_PORT                               = "3000"
   }
 }
