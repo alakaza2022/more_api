@@ -12,7 +12,7 @@ terraform {
     storage_account_name = "popoutboprodweublob"
     container_name       = "terraform"
     resource_group_name = "rg-popout-back-office-we"
-    key                  = "terraform.tfstate"
+    key                  = "backend.tfstate"
   }
 }
 
