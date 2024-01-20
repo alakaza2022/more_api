@@ -17,6 +17,9 @@ const getAllMovies = async () => {
     }
 
     const movies = await response.json();
+    for (movie of movies.results) {
+      movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
+    }
     
     return movies.results; // Assuming the API response contains a 'results' property with an array of movies
   } catch (error) {
