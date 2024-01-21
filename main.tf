@@ -12,9 +12,10 @@ terraform {
     storage_account_name = "popoutboprodweublob"
     container_name       = "terraform"
     resource_group_name = "rg-popout-back-office-we"
-    key                  = "backend.tfstate"
+    key                  = "terraform.tfstate"
   }
 }
+
 
 variable "image_name" {}
 
@@ -42,6 +43,11 @@ resource "azurerm_app_service_plan" "more_service_plan" {
 
 }
 
+data "azurerm_app_service" "more_app_service_front" {
+  name                = "app-more-webapp-fronent-we"
+  resource_group_name = azurerm_resource_group.more_resource_group.name
+}
+
 resource "azurerm_app_service" "more_app_service_back" {
   name                = "app-more-webapp-backend-we"
   location            = azurerm_resource_group.more_resource_group.location
@@ -60,3 +66,5 @@ resource "azurerm_app_service" "more_app_service_back" {
     WEBSITES_PORT                               = "3000"
   }
 }
+
+import
