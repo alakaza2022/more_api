@@ -66,5 +66,3 @@ resource "azurerm_app_service" "more_app_service_back" {
     WEBSITES_PORT                               = "3000"
   }
 }
-
-import
