@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  # Your Node.js server
   app:
     build:
       context: .
